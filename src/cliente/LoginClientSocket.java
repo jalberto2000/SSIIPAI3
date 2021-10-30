@@ -6,25 +6,25 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.Socket;
 
+import javax.net.ssl.SSLSocket;
+import javax.net.ssl.SSLSocketFactory;
 import javax.swing.JOptionPane;
 
 public class LoginClientSocket {
-    
+
     public static void main(String[] args) throws IOException {
         try {
 
             // create SSLSocket from factory
-            Socket socket = new Socket("127.0.0.1", 3343);
-
+            SSLSocketFactory socketFactory = (SSLSocketFactory) SSLSocketFactory.getDefault();
+            SSLSocket socket = (SSLSocket) socketFactory.createSocket("localhost", 10000);
+            System.out.println(socket.getSession().getProtocol());
             // create PrintWriter for sending login to server
             PrintWriter output = new PrintWriter(new OutputStreamWriter(
                     socket.getOutputStream()));
-
             // create BufferedReader for reading server response
             BufferedReader input = new BufferedReader(new InputStreamReader(
                     socket.getInputStream()));
-
-            boolean b = true;
 
             // clean up streams and Socket
             output.close();
