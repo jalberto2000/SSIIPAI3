@@ -1,14 +1,10 @@
 package servidor;
-
-import javax.net.ssl.SSLServerSocket;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Arrays;
 
 
 public class LoginServerSocket {
@@ -23,10 +19,10 @@ public class LoginServerSocket {
             // open PrintWriter for writing data to client
             PrintWriter output = new PrintWriter(new
                     OutputStreamWriter(socket.getOutputStream()));
-            boolean b = true;
-            while(b){
-                input.readLine();
-            }
+
+            String message = input.readLine();
+            System.out.println(message);
+            output.println("El mensaje ha sido guardado correctamente");
             output.close();
             input.close();
             socket.close();

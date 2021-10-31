@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 
 public class LoginClientSocket {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args){
         try {
 
             // create SSLSocket from factory
@@ -22,10 +22,15 @@ public class LoginClientSocket {
             // create PrintWriter for sending login to server
             PrintWriter output = new PrintWriter(new OutputStreamWriter(
                     socket.getOutputStream()));
+
+            String mensaje = JOptionPane.showInputDialog(null, "Introduce el mensaje");
+            output.println(mensaje);
+            output.flush();
             // create BufferedReader for reading server response
             BufferedReader input = new BufferedReader(new InputStreamReader(
                     socket.getInputStream()));
-
+            String respuesta = input.readLine();
+            JOptionPane.showMessageDialog(null, respuesta);
             // clean up streams and Socket
             output.close();
             input.close();
